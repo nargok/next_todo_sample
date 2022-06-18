@@ -1,27 +1,28 @@
 import type { NextPage } from "next";
-import useSWR from "swr";
+import axios from "axios";
+import TaskForm from "./component/task/TaskForm";
+import TaskList from "./component/task/TaskList";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// const postFetcher = (url: string) => post(url, params).then((res) => res.json());
 
-interface Task {
-  task_id: string;
-  title: string;
-  status: string;
-}
+// const res = await axios.post("/user", {
+//   id: 123,
+//   name: "Yamada Tarou",
+// });
 
 const Todo: NextPage = () => {
-  const { data, error } = useSWR(`api/task/list`, fetcher);
-  if (error) return <div>Fiald to load task</div>;
-  if (!data) return <div>Loading...</div>;
+  const postTask = async (taskTitle: string) => {
+    // console.log("taskTitle is", taskTitle);
+    const response = await axios.post("api/task/register", {
+      title: taskTitle,
+    });
+    // console.log("in todo page", response);
+  };
+
   return (
     <>
-      <ul>
-        {data.data.task_list.map((task: Task) => (
-          <li key={task.task_id}>
-            {task.title} {task.status}
-          </li>
-        ))}
-      </ul>
+      <TaskForm postTask={postTask}></TaskForm>
+      <TaskList></TaskList>
     </>
   );
 };
