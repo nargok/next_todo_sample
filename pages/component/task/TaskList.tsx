@@ -5,15 +5,17 @@ import { Task } from "../../../models/Task";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const TaskList: NextPage = () => {
-  const { data, error } = useSWR(`api/task/list`, fetcher);
+interface Props {
+  taskList: Task[];
+}
 
-  if (error) return <div>Fiald to load task</div>;
-  if (!data) return <div>Loading...</div>;
+const TaskList: NextPage<Props> = ({ taskList }) => {
+  if (!taskList) return <div>Loading...</div>;
+
   return (
     <>
       <ul>
-        {data.data.task_list.map((task: Task) => (
+        {taskList.map((task: Task) => (
           <li key={task.task_id}>
             {task.title} {task.status}
           </li>
