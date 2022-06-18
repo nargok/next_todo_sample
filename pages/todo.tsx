@@ -16,13 +16,11 @@ const Todo: NextPage = () => {
   return (
     <>
       <ul>
-        {data.data
-          ? data.data.task_list.map((task: Task) => (
-              <li key={task.task_id}>
-                {task.title} {task.status}
-              </li>
-            ))
-          : "hoge"}
+        {data.data.task_list.map((task: Task) => (
+          <li key={task.task_id}>
+            {task.title} {task.status}
+          </li>
+        ))}
       </ul>
     </>
   );
