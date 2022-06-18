@@ -11,6 +11,7 @@ const TaskForm: NextPage<Props> = ({ postTask }) => {
   // https://zenn.dev/kenta0313/articles/a39fb1d8edc3a4#%E4%BE%BF%E5%88%A9%E3%81%AA%E5%9E%8B%E6%8E%A8%E8%AB%96
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     postTask(title);
+    setTitle("");
     event.preventDefault();
   };
 
@@ -26,6 +27,7 @@ const TaskForm: NextPage<Props> = ({ postTask }) => {
             id="username"
             type="text"
             placeholder="Task"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
