@@ -17,10 +17,10 @@ const Todo: NextPage = () => {
   };
 
   return (
-    <>
+    <div className="px-4 py-4">
       <TaskForm postTask={postTask}></TaskForm>
       <TaskList taskList={data?.data?.task_list}></TaskList>
-    </>
+    </div>
   );
 };
 
