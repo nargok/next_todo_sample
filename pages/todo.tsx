@@ -19,7 +19,8 @@ const Todo: NextPage = () => {
   return (
     <div className="px-4 py-4">
       <TaskForm postTask={postTask}></TaskForm>
-      <TaskList taskList={data?.data?.task_list}></TaskList>
+      <TaskList listTitle="Todo" list={data?.data?.todo_list}></TaskList>
+      <TaskList listTitle="Done" list={data?.data?.done_list}></TaskList>
     </div>
   );
 };
