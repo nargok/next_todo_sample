@@ -16,10 +16,21 @@ const Todo: NextPage = () => {
     mutate("api/task/list");
   };
 
+  const completeTask = async (taskId: string) => {
+    const response = await axios.post("api/task/complete", {
+      task_id: taskId,
+    });
+    mutate("api/task/list");
+  };
+
   return (
     <div className="px-4 py-4">
       <TaskForm postTask={postTask}></TaskForm>
-      <TaskList isDone={false} list={data?.data?.todo_list}></TaskList>
+      <TaskList
+        isDone={false}
+        list={data?.data?.todo_list}
+        handleCheck={completeTask}
+      ></TaskList>
       <TaskList isDone={true} list={data?.data?.done_list}></TaskList>
     </div>
   );

@@ -8,9 +8,15 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 interface Props {
   isDone: boolean;
   list: Task[];
+  handleCheck?: Function;
 }
 
-const TaskList: NextPage<Props> = ({ isDone, list }) => {
+const TaskList: NextPage<Props> = ({ isDone, list, handleCheck }) => {
+  const complete = (taskId: string) => {
+    if (!handleCheck) return;
+    handleCheck(taskId);
+  };
+
   return (
     <div className="mb-4">
       <details className="" open>
@@ -27,6 +33,7 @@ const TaskList: NextPage<Props> = ({ isDone, list }) => {
                   value=""
                   id="flexCheckDefault"
                   checked={isDone}
+                  onChange={() => complete(task.task_id)}
                 />
                 <span className={isDone ? "line-through" : ""}>
                   {task.title} {task.status}
