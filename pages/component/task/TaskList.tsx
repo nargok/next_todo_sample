@@ -6,16 +6,16 @@ import { Task } from "../../../models/Task";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 interface Props {
-  listTitle: string;
+  isDone: boolean;
   list: Task[];
 }
 
-const TaskList: NextPage<Props> = ({ listTitle, list }) => {
+const TaskList: NextPage<Props> = ({ isDone, list }) => {
   return (
     <div className="mb-4">
       <details className="" open>
         <summary className="bg-inherit px-5 py-3 text-lg cursor-pointer">
-          {listTitle}
+          {isDone ? "Done" : "Todo"}
         </summary>
         <div className="bg-white px-5 py-3 text-sm font-light">
           <ul>
@@ -26,8 +26,9 @@ const TaskList: NextPage<Props> = ({ listTitle, list }) => {
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
+                  checked={isDone}
                 />
-                <span>
+                <span className={isDone ? "line-through" : ""}>
                   {task.title} {task.status}
                 </span>
               </li>
